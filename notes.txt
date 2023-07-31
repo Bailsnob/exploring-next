@@ -1,0 +1,34 @@
+if we are exporting html through a function, it must start with a capital letter
+
+page functions typically titled based on what the page is doing
+
+when you output html, react and nextjs are generating keys for each element
+
+useEffect hook only runs once when second argument passed as empty arr
+
+client-side data fetching is best for data which doesn't require frequent changes
+  ex: horrible choice for stock ticker
+
+static data fetching: pregeneration during build time
+
+fetchposts is async, fetching data from URL using http req, waits because we told it to, parses using function
+
+- dynamic routing: routing system can respond to variables through bracketed parameters; way to create page through template with arguments provided
+
+- catchall page: page for every other possible path; special 403
+
+- 403 means no path match and no catchall
+
+- Link simulates linking without doing a html hyperlink; for single page applications
+
+- client side data fetching should be used when something needs to be updated constantly
+
+- server component - gotten before the site is sent to user; non-interactive
+
+- apis usually exchange json
+
+- apis exchange data btwn websites and also allow us to cross the client server divide
+
+Stuff to add:
+- could add nesting to allow for admin privilidges
+
