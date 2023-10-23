@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { CONSTANTS } from "@/app/constants";
+import CONSTANTS from "@/app/constants";
 
 export default function CreatePostPage() {
   const [slugLabel, setSlugLabel] = useState("<slug>");
@@ -11,11 +11,13 @@ export default function CreatePostPage() {
   const excerptInputRef = useRef();
   const contentInputRef = useRef();
 
-  function updatePostUrl() { //runs when on change event occurs in slug input field
+  function updatePostUrl() {
+    //runs when on change event occurs in slug input field
     setSlugLabel(slugInputRef.current.value);
   }
 
-  function submitPost(event) { //called when form submitted
+  function submitPost(event) {
+    //called when form submitted
     event.preventDefault(); //prevents normal reaction to submission
 
     const formData = {
@@ -25,17 +27,14 @@ export default function CreatePostPage() {
       excerpt: excerptInputRef.current.value,
       content: contentInputRef.current.value,
     }; //captures values user has currently put in
-    fetch("/api/admin/create-post", { 
+    fetch("/api/admin/create-post", {
       method: "POST",
       body: JSON.stringify(formData),
       headers: {
         "Content-Type": "application/json",
       },
     })
-      .then((data) => {
-        console.log(data.json());
-        return data.json();
-      })
+      .then((data) => data.json())
       .then((response) => {
         if (response.status === CONSTANTS.RESPONSE_STATUS.OK) {
           alert("added 1 post successfully");

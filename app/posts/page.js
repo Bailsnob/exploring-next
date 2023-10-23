@@ -1,16 +1,20 @@
 import Link from "next/link";
+import path from "path";
+import { readFileSync } from "fs";
 
-async function fetchPosts() {
-  const url = "https://raw.githubusercontent.com/Bailsnob/friendliness/main/man.json";
-  // const response = await fetch(url, {next: {revalidate: 5}});
-  const response = await fetch(url, {cache: "no-store"});
-  const data = await response.json();
-  return data.posts; 
+export const revalidate = 30;
+
+function fetchPosts() {
+  const filePath = path.join(process.cwd(), "app", "db", "posts.json");
+  const jsonData = readFileSync(filePath);
+  const data = JSON.parse(jsonData);
+  return data; 
 }
 
-export default async function AllPostsPage() {
+export default function AllPostsPage() {
   const lastRenderedTime = new Date().toLocaleTimeString();
-  const posts = await fetchPosts();
+  const posts = fetchPosts();
+  // console.log(posts);
 
   return (
     <>
@@ -19,7 +23,7 @@ export default async function AllPostsPage() {
       <ul>
         {posts && posts.map((post) => (
           <li key={post.id}>
-            <Link href={`/posts/${posts.id}`}>{post.title}</Link>
+            <Link href={`/posts/${post.id}`}>{post.title}</Link>
           </li>
         ))}
       </ul>
